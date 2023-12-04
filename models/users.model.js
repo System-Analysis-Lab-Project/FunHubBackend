@@ -3,7 +3,8 @@ const userRoles = require('../utils/userRolels');
 const Schema = mongoose.Schema
 
 const user = new Schema ({
-    fullName: {type: String, required: true},
+    firstname: {type: String, required: true},
+    lastname: {type: String, required: true},
     email: {type: String, unique: true, required: true},
     password: {type: String, required: true},
     token : {type : String, required: false},

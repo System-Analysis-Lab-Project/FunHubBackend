@@ -6,16 +6,18 @@ const userRoles = require("../utils/userRolels");
 const mongoose = require('mongoose')
 
 module.exports.signUp = async (req, res) => {
-    let {fullName, email, password} = req.body;
+    let {firstname,lastname, email, password} = req.body;
     password = bcrypt.hashSync(password + config.password, parseInt(config.salt))
     const e = await User.find({email})
     if(e.length !== 0){
         return res.json("user found please login");
     }
-    const user = new User({fullName, email, password})
+    const user = new User({firstname,lastname, email, password})
 
     const token = await jwt({
         email: user.email,
+        firstname : user.firstname,
+        lastname : user.lastname,
         id: user._id,
         role: user.role,
       });
