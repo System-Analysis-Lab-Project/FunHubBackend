@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require("cors")
 const config = require('./config')
 const router = require('./routers/index')
 
@@ -9,6 +10,7 @@ mongoose.connect(config.mongo_url).then(() => console.log("database connected"))
 
 app.use(express.json())
 app.use(router)
+app.use(cors)
 app.get('/', (req, res) => {
     res.send("hello server")
 })
