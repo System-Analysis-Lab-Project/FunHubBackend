@@ -1,20 +1,25 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require("cors")
-const config = require('./config')
-const router = require('./routers/index')
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const config = require("./config");
+const router = require("./routers/index");
+const cookieParser = require("cookie-parser");
 
-const app = express()
+const app = express();
+app.use(cookieParser());
 
-mongoose.connect(config.mongo_url).then(() => console.log("database connected")).catch(err => console.log(err))
+mongoose
+  .connect(config.mongo_url)
+  .then(() => console.log("database connected"))
+  .catch((err) => console.log(err));
 
-app.use(express.json())
-app.use(router)
-app.use(cors)
-app.get('/', (req, res) => {
-    res.send("hello server")
-})
+app.use(cors());
+app.use(express.json());
+app.use(router);
+app.get("/", (req, res) => {
+  res.send("hello server");
+});
 
 app.listen(config.port, () => {
-    console.log("server is started at port " + config.port)
-})
+  console.log("server is started at port " + config.port);
+});
