@@ -15,7 +15,7 @@ mongoose
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://funhub-dc92c.web.app",
     credentials: true,
   })
 );
